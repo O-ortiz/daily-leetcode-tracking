@@ -29,7 +29,6 @@ We make a new ListNode * object that will be the head of our list. As we go down
 
 It helps us to have a temporary list node object. 
 
-
 ```
 /**
  * Definition for singly-linked list.
