@@ -27,7 +27,7 @@ We could take the naive approach and brute force this, which could likely be O(n
 
 Since we can chose to not sell (output = 0), we have that be the default for our return. 
 
-We could try keeping track of all of the differences between a number and every other number after it in the array, but we only really care about the profit made after each number. 
+We could try keeping track of all of the differences between a number and every other number after it in the array, but we only really care about the profit made further down the array.  
 
 To do this, we only need to keep track of the largest profit we've found so far as we traverse the array. Since we don't need to keep track of indices, this simplifies the solution to use only a max() function between the current max value (ans) and the difference between the int we are currently looking at in the array and the smallest value seen before this index. If this difference is larger (ie this is now the largest sell value we've found), then we take this new difference as the max value and set it to ans. 
 
