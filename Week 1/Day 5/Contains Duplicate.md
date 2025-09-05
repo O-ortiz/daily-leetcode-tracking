@@ -1,3 +1,4 @@
+
 Given an integer array `nums`, return `true` if any value appears **at least twice** in the array, and return `false` if every element is distinct.
 
 **Example 1:**
@@ -45,10 +46,67 @@ public:
 
     bool containsDuplicate(vector<int>& nums) {
 		std::unordered_map<int,int> hash;
-		vector<int>::iterator it;
 		
-		for(it = nums.begin(); it != nums.end() )
+		for (int i = 0; i < nums.size(); i++){
+			if(hash.find(nums[i])!=hash.end()){
+				return true;
+			}
+			else{
+		        hash.insert({nums[i], 1});
+			}
+		}
+		
+		return false;
     }
 
 };
 ```
+
+This feels a little weird since the hash value is just 1 every time, but that's literally all we need. We can actually instead of using a hash (unordered_map) instead use an unordered_set, which feel more intuitive:
+
+```
+class Solution {
+
+public:
+
+    bool containsDuplicate(vector<int>& nums) {
+		std::unordered_set<int> seen;
+		
+		for (int x : nums){ // kinda forgot we can do this
+			if(seen.count(x)){
+				return true;
+			}
+			seen.insert(x);
+		}
+		
+		return false;
+    }
+
+};
+```
+
+You know, I thought putting the array into a fancy function that can just sort the array for us was a Python thing only but turns out that no, we CAN use std::sort and just iterate through the resulting list and checking if the value to its right is the same. 
+
+```
+class Solution {
+
+public:
+
+    bool containsDuplicate(vector<int>& nums) {
+		std::sort(nums.begin(),nums.end());
+		
+		for (int i=0; i < nums.size()-1; i++){ // kinda forgot we can do this
+			if(nums[i] == nums[i+1]){
+				return true;
+			}
+		}
+		
+		return false;
+    }
+
+};
+```
+
+The implementation with the hash/set is O(n). And the implementation with sort should be O(n lg n)
+
+
